@@ -2,7 +2,7 @@
     <id>EditorGroups</id>
     <name>Editor Groups</name>
 
-    <vendor url="https://github.com/krasa/EditorGroups" email="vojta.krasa@gmail.com">Vojtech Krasa</vendor>
+    <vendor url="https://github.com/krasa/EditorGroups" email="vojta.krasa@gmail.com">Efluid</vendor>
 
     <description><![CDATA[
         <h1>Editor Groups</h1>
@@ -50,52 +50,52 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup id="Editor Groups" displayType="BALLOON"/>
-        <editorNotificationProvider implementation="krasa.editorGroups.support.MyEditorNotificationsProvider"/>
+        <editorNotificationProvider implementation="efluid.editorGroups.support.MyEditorNotificationsProvider"/>
         <!-- Add your extensions here -->
-        <projectService serviceImplementation="krasa.editorGroups.EditorGroupManager"/>
-        <projectService serviceImplementation="krasa.editorGroups.AutoGroupProvider"/>
-        <projectService serviceImplementation="krasa.editorGroups.RegexGroupProvider"/>
-        <projectService serviceImplementation="krasa.editorGroups.ExternalGroupProvider"/>
-        <projectService serviceImplementation="krasa.editorGroups.IndexCache"/>
-        <editorTabTitleProvider implementation="krasa.editorGroups.EditorGroupTabTitleProvider" order="first"/>
-        <editorTabColorProvider implementation="krasa.editorGroups.MyEditorTabColorProvider" order="first"/>
-        <defaultLiveTemplatesProvider implementation="krasa.editorGroups.support.EditorGroupsLiveTemplatesProvider"/>
+        <projectService serviceImplementation="efluid.editorGroups.EditorGroupManager"/>
+        <projectService serviceImplementation="efluid.editorGroups.AutoGroupProvider"/>
+        <projectService serviceImplementation="efluid.editorGroups.RegexGroupProvider"/>
+        <projectService serviceImplementation="efluid.editorGroups.ExternalGroupProvider"/>
+        <projectService serviceImplementation="efluid.editorGroups.IndexCache"/>
+        <editorTabTitleProvider implementation="efluid.editorGroups.EditorGroupTabTitleProvider" order="first"/>
+        <editorTabColorProvider implementation="efluid.editorGroups.MyEditorTabColorProvider" order="first"/>
+        <defaultLiveTemplatesProvider implementation="efluid.editorGroups.support.EditorGroupsLiveTemplatesProvider"/>
 
-        <!--<fileBasedIndex implementation="krasa.editorGroups.EditorGroupFileBasedIndexExtension"/>-->
+        <!--<fileBasedIndex implementation="efluid.editorGroups.EditorGroupFileBasedIndexExtension"/>-->
 
-        <applicationService serviceImplementation="krasa.editorGroups.ApplicationConfigurationComponent"/>
-        <fileBasedIndex implementation="krasa.editorGroups.index.EditorGroupIndex"/>
-        <fileBasedIndex implementation="krasa.editorGroups.index.FilenameWithoutExtensionIndex"/>
-        <projectService serviceImplementation="krasa.editorGroups.PanelRefresher"/>
-        <applicationService serviceImplementation="krasa.editorGroups.index.MyFileNameIndexService"/>
-        <applicationConfigurable instance="krasa.editorGroups.MyConfigurable" id="EditorGroups"
+        <applicationService serviceImplementation="efluid.editorGroups.ApplicationConfigurationComponent"/>
+        <fileBasedIndex implementation="efluid.editorGroups.index.EditorGroupIndex"/>
+        <fileBasedIndex implementation="efluid.editorGroups.index.FilenameWithoutExtensionIndex"/>
+        <projectService serviceImplementation="efluid.editorGroups.PanelRefresher"/>
+        <applicationService serviceImplementation="efluid.editorGroups.index.MyFileNameIndexService"/>
+        <applicationConfigurable instance="efluid.editorGroups.MyConfigurable" id="EditorGroups"
                                  displayName="Editor Groups"/>
 
-        <fileTypeFactory implementation="krasa.editorGroups.language.EditorGroupsTypeFactory"/>
+        <fileTypeFactory implementation="efluid.editorGroups.language.EditorGroupsTypeFactory"/>
         <lang.parserDefinition language="EditorGroups"
-                               implementationClass="krasa.editorGroups.language.EditorGroupsParserDefinition"/>
+                               implementationClass="efluid.editorGroups.language.EditorGroupsParserDefinition"/>
         <lang.commenter language="EditorGroups"
-                        implementationClass="krasa.editorGroups.language.EditorGroupsCommenter"/>
-        <externalAnnotator implementationClass="krasa.editorGroups.language.annotator.EditorGroupsExternalAnnotator"
+                        implementationClass="efluid.editorGroups.language.EditorGroupsCommenter"/>
+        <externalAnnotator implementationClass="efluid.editorGroups.language.annotator.EditorGroupsExternalAnnotator"
                            language="EditorGroups"/>
 
         <completion.contributor language="EditorGroups"
-                                implementationClass="krasa.editorGroups.language.MyFilePathCompletionContributor"
+                                implementationClass="efluid.editorGroups.language.MyFilePathCompletionContributor"
                                 id="EditorGroups_filePath"/>
         <completion.contributor language="EditorGroups"
-                                implementationClass="krasa.editorGroups.language.MyCompletionContributor"
+                                implementationClass="efluid.editorGroups.language.MyCompletionContributor"
                                 id="EditorGroups_MyCompletionContributor"/>
         <themeMetadataProvider path="/themes/metadata/EditorGroups.themeMetadata.json"/>
     </extensions>
 
     <application-components>
         <!--<component>-->
-        <!--<implementation-class>krasa.editorGroups.EditorGroupsTabsPainterPatcherComponent</implementation-class>-->
+        <!--<implementation-class>efluid.editorGroups.EditorGroupsTabsPainterPatcherComponent</implementation-class>-->
         <!--</component>-->
     </application-components>
     <project-components>
         <component>
-            <implementation-class>krasa.editorGroups.ProjectComponent</implementation-class>
+            <implementation-class>efluid.editorGroups.ProjectComponent</implementation-class>
         </component>
     </project-components>
     <actions>
@@ -103,112 +103,112 @@
             <reference id="CompareFileWithEditor"/>
         </group>
 
-        <action class="krasa.editorGroups.actions.PreviousAction" id="krasa.editorGroups.Previous"
+        <action class="efluid.editorGroups.actions.PreviousAction" id="efluid.editorGroups.Previous"
                 text="Open Previous File in Editor Group" icon="/icons/back.png">
             <keyboard-shortcut first-keystroke="ctrl  SEMICOLON" keymap="$default"/>
             <mouse-shortcut keystroke="ctrl button143" keymap="$default"/>
         </action>
-        <action class="krasa.editorGroups.actions.PreviousInNewTabAction" id="krasa.editorGroups.PreviousInNewTab"
+        <action class="efluid.editorGroups.actions.PreviousInNewTabAction" id="efluid.editorGroups.PreviousInNewTab"
                 text="Open Previous File in Editor Group in a New Tab">
             <keyboard-shortcut first-keystroke="ctrl alt SEMICOLON" keymap="$default"/>
             <mouse-shortcut keystroke="ctrl alt button143" keymap="$default"/>
         </action>
-        <action class="krasa.editorGroups.actions.PreviousInNewWindowAction"
-                id="krasa.editorGroups.PreviousInNewWindow"
+        <action class="efluid.editorGroups.actions.PreviousInNewWindowAction"
+                id="efluid.editorGroups.PreviousInNewWindow"
                 text="Open Previous File in Editor Group in a New Window">
             <!--<keyboard-shortcut first-keystroke="ctrl shift SEMICOLON" keymap="$default"/>-->
             <mouse-shortcut keystroke="ctrl shift button143" keymap="$default"/>
         </action>
 
 
-        <action class="krasa.editorGroups.actions.NextAction" id="krasa.editorGroups.Next"
+        <action class="efluid.editorGroups.actions.NextAction" id="efluid.editorGroups.Next"
                 text="Open Next File in Editor Group" icon="/icons/forward.png">
             <keyboard-shortcut first-keystroke="ctrl  QUOTE" keymap="$default"/>
             <mouse-shortcut keystroke="ctrl button142" keymap="$default"/>
         </action>
-        <action class="krasa.editorGroups.actions.NextInNewTabAction" id="krasa.editorGroups.NextInNewTab"
+        <action class="efluid.editorGroups.actions.NextInNewTabAction" id="efluid.editorGroups.NextInNewTab"
                 text="Open Next File in Editor Group in a New Tab">
             <keyboard-shortcut first-keystroke="ctrl alt QUOTE" keymap="$default"/>
             <mouse-shortcut keystroke="ctrl alt button142" keymap="$default"/>
         </action>
-        <action class="krasa.editorGroups.actions.NextInNewWindowAction" id="krasa.editorGroups.NextInNewWindow"
+        <action class="efluid.editorGroups.actions.NextInNewWindowAction" id="efluid.editorGroups.NextInNewWindow"
                 text="Open Next File in Editor Group in a New Window">
             <!--<keyboard-shortcut first-keystroke="ctrl shift QUOTE" keymap="$default"/>-->
             <mouse-shortcut keystroke="ctrl shift button142" keymap="$default"/>
         </action>
 
 
-        <action class="krasa.editorGroups.actions.RefreshAction" id="krasa.editorGroups.Refresh"
+        <action class="efluid.editorGroups.actions.RefreshAction" id="efluid.editorGroups.Refresh"
                 text="Refresh" description="Refresh Editor Groups panel in current file"
                 icon="/icons/refresh.png">
             <keyboard-shortcut first-keystroke="ctrl alt Q" keymap="$default"/>
         </action>
 
 
-        <action id="krasa.editorGroups.Reindex" class="krasa.editorGroups.index.ReindexAction"
+        <action id="efluid.editorGroups.Reindex" class="efluid.editorGroups.index.ReindexAction"
                 text="Reindex All Projects" icon="/icons/forceRefresh.png">
         </action>
 
-        <action id="krasa.editorGroups.ReindexThisFile" class="krasa.editorGroups.index.ReindexThisFileAction"
+        <action id="efluid.editorGroups.ReindexThisFile" class="efluid.editorGroups.index.ReindexThisFileAction"
                 icon="/icons/forceRefresh.png"
                 text="Reindex This File">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt F3"/>
         </action>
 
 
-        <action id="krasa.editorGroups.ToggleAutoSameNameGroups"
-                class="krasa.editorGroups.actions.ToggleAutoSameNameGroupsAction"
+        <action id="efluid.editorGroups.ToggleAutoSameNameGroups"
+                class="efluid.editorGroups.actions.ToggleAutoSameNameGroupsAction"
                 text="Autogroups by the Current File Name"
                 description="Automatic Editor Groups by the Current File Name (without extension), if no manually defined exists"
         />
 
-        <action id="krasa.editorGroups.ToggleFolderEditorGroups"
-                class="krasa.editorGroups.actions.ToggleAutoFolderGroupsAction"
+        <action id="efluid.editorGroups.ToggleFolderEditorGroups"
+                class="efluid.editorGroups.actions.ToggleAutoFolderGroupsAction"
                 text="Autogroups by the Current Folder"
                 description="Automatic Editor Groups by the Current Folder, if no manually defined exists"
         />
 
-        <action id="krasa.editorGroups.ToggleForce"
-                class="krasa.editorGroups.actions.ToggleForceAction"
+        <action id="efluid.editorGroups.ToggleForce"
+                class="efluid.editorGroups.actions.ToggleForceAction"
                 text="Switch from Autogroups on Manual Refresh"
                 description="Switches from AutoGroups to manually defined one - if exists for the current file"
         />
 
-        <action id="krasa.editorGroups.ToggleHideEmpty"
-                class="krasa.editorGroups.actions.ToggleHideEmptyAction"
+        <action id="efluid.editorGroups.ToggleHideEmpty"
+                class="efluid.editorGroups.actions.ToggleHideEmptyAction"
                 text="Hide the panel when no group exists or is empty"/>
 
 
-        <action id="krasa.editorGroups.ToggleShowSize"
-                class="krasa.editorGroups.actions.ToggleShowSizeAction"
+        <action id="efluid.editorGroups.ToggleShowSize"
+                class="efluid.editorGroups.actions.ToggleShowSizeAction"
                 text="Show group size at titles"/>
 
 
-        <action id="krasa.editorGroups.SwitchGroup" class="krasa.editorGroups.actions.SwitchGroupAction"
+        <action id="efluid.editorGroups.SwitchGroup" class="efluid.editorGroups.actions.SwitchGroupAction"
                 text="Switch Editor Group" icon="/icons/groupBy.svg">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt W"/>
         </action>
-        <action id="krasa.editorGroups.SwitchFile" class="krasa.editorGroups.actions.SwitchFileAction"
+        <action id="efluid.editorGroups.SwitchFile" class="efluid.editorGroups.actions.SwitchFileAction"
                 text="Switch File" description="Switch File in Editor Group"
                 icon="/icons/listFiles.svg">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt W"/>
         </action>
 
-        <action id="krasa.editorGroups.OpenConfiguration" class="krasa.editorGroups.actions.OpenConfigurationAction"
+        <action id="efluid.editorGroups.OpenConfiguration" class="efluid.editorGroups.actions.OpenConfigurationAction"
                 icon="AllIcons.General.Settings"
                 text="Open configuration" description="Open EditorGroups configuration">
         </action>
-        <!--        <action id="krasa.editorGroups.TogglePanelVisibility"-->
-        <!--                class="krasa.editorGroups.actions.TogglePanelVisibilityAction" text="Toggle Panel Visibility"/>-->
+        <!--        <action id="efluid.editorGroups.TogglePanelVisibility"-->
+        <!--                class="efluid.editorGroups.actions.TogglePanelVisibilityAction" text="Toggle Panel Visibility"/>-->
 
-        <action id="krasa.editorGroups.ViewPanelToggleAction"
-                class="krasa.editorGroups.actions.ViewPanelToggleAction">
+        <action id="efluid.editorGroups.ViewPanelToggleAction"
+                class="efluid.editorGroups.actions.ViewPanelToggleAction">
             <add-to-group group-id="UIToggleActions"/>
 
         </action>
 
 
-        <action id="AddToCurrentFavoritesAction" class="krasa.editorGroups.actions.AddToCurrentFavoritesAction"
+        <action id="AddToCurrentFavoritesAction" class="efluid.editorGroups.actions.AddToCurrentFavoritesAction"
                 description="Provided by 'Editor Groups' plugin"
                 text="Add to Currently Opened Favorites" icon="AllIcons.Toolwindows.ToolWindowFavorites">
             <!--<add-to-group group-id="GuiDesigner.EditorPopupMenu" anchor="before" relative-to-action="AddToFavorites"/>-->
@@ -229,9 +229,9 @@
             <!--<add-to-group group-id="PyCallHierarchyPopupMenu" anchor="before" relative-to-action="AddToFavorites"/>-->
         </action>
 
-        <action id="krasa.editorGroups.actions.RemoveFromCurrentFavorites"
+        <action id="efluid.editorGroups.actions.RemoveFromCurrentFavorites"
                 description="Provided by 'Editor Groups' plugin"
-                class="krasa.editorGroups.actions.RemoveFromCurrentFavoritesAction"
+                class="efluid.editorGroups.actions.RemoveFromCurrentFavoritesAction"
                 text="Remove from Current Favorites">
             <!--<add-to-group group-id="GuiDesigner.EditorPopupMenu" anchor="before" relative-to-action="AddToFavorites"/>-->
             <!--<add-to-group group-id="TypeHierarchyPopupMenu" anchor="before" relative-to-action="AddToFavorites"/>-->

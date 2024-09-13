@@ -1,0 +1,17 @@
+package efluid.editorGroups.actions;
+
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import efluid.editorGroups.EditorGroupPanel;
+import efluid.editorGroups.Splitters;
+import org.jetbrains.annotations.NotNull;
+
+public class NextInNewWindowAction extends EditorGroupsAction {
+  @Override
+  public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
+    EditorGroupPanel panel = getEditorGroupPanel(anActionEvent);
+    if (panel != null) {
+      panel.next(true, true, Splitters.NONE);
+    }
+
+  }
+}

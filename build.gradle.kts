@@ -5,9 +5,9 @@ fun environment(key: String) = providers.environmentVariable(key)
 
 plugins {
   id("java")
-  id("org.jetbrains.intellij") version "1.14.1"
-  id("org.jetbrains.kotlin.jvm") version "1.8.21"
-  id("org.jetbrains.changelog") version "2.1.0"
+  id("org.jetbrains.kotlin.jvm") version "2.0.20"
+  id("org.jetbrains.changelog") version "2.2.1"
+  id("org.jetbrains.intellij.platform") version "2.0.1"
 }
 
 group = properties("pluginGroup").get()
@@ -30,7 +30,6 @@ changelog {
 
 tasks {
   patchPluginXml {
-    version.set(properties("pluginVersion").get())
     sinceBuild.set(properties("pluginSinceBuild").get())
     untilBuild.set(properties("pluginUntilBuild").get())
 
@@ -39,7 +38,7 @@ tasks {
     changeNotes.set(provider {
       with(changelog) {
         renderItem(
-          (getOrNull(pluginVersion) ?: getUnreleased())
+          (getOrNull("pluginVersion") ?: runCatching { getLatest() }.getOrElse { getUnreleased() })
             .withHeader(false)
             .withEmptySections(false),
           Changelog.OutputType.HTML,
@@ -62,21 +61,21 @@ tasks {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
   }
 
-  signPlugin {
-    certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-    privateKey.set(System.getenv("PRIVATE_KEY"))
-    password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
-  }
+  //signPlugin {
+  //  certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+  //  privateKey.set(System.getenv("PRIVATE_KEY"))
+  //  password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+  //}
 
-  publishPlugin {
-    dependsOn("patchChangelog")
-    token.set(System.getenv("PUBLISH_TOKEN") ?: file("./publishToken").readText().trim())
-    // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
-    // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
-    // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-    channels.set(properties("pluginVersion")
-      .map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) })
-  }
+  //publishPlugin {
+  //  dependsOn("patchChangelog")
+  //  token.set(System.getenv("PUBLISH_TOKEN") ?: file("./publishToken").readText().trim())
+  //  // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
+  //  // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
+  //  // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
+  //  channels.set(properties("pluginVersion")
+  //    .map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) })
+  //}
 
   buildSearchableOptions {
     enabled = false
@@ -93,31 +92,29 @@ tasks {
 
 repositories {
   mavenCentral()
-}
+  google()
+  gradlePluginPortal()
 
-// Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-intellij {
-  pluginName.set(properties("pluginName").get())
-  version.set(properties("platformVersion").get())
-  type.set(properties("platformType").get())
-  downloadSources.set(true)
-  instrumentCode.set(true)
-  updateSinceUntilBuild.set(true)
-
-  plugins.set(
-    listOf(
-      "java",
-    )
-  )
+  intellijPlatform {
+    defaultRepositories()
+  }
 }
 
 
 dependencies {
-// https://mvnrepository.com/artifact/commons-io/commons-io
+  intellijPlatform {
+    intellijIdeaUltimate("2024.2.1", useInstaller = false)
+
+    bundledPlugin("com.intellij.java")
+
+    pluginVerifier()
+    zipSigner()
+    instrumentationTools()
+  }
+
+  // https://mvnrepository.com/artifact/commons-io/commons-io
   implementation("commons-io:commons-io:2.11.0")
 
   // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
   implementation("org.apache.commons:commons-lang3:3.12.0")
-
 }
-
